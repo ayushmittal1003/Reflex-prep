@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Plans from './components/Plans';
@@ -8,8 +9,12 @@ import WhyReflex from './components/WhyReflex';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
 import TestKnowledge from './components/TestKnowledge';
+import PaymentPage from './components/PaymentPage';
 
 function App() {
+  const [showPaymentPage, setShowPaymentPage] = useState(false);
+  const [selectedPlanId, setSelectedPlanId] = useState<number>(1);
+
   useEffect(() => {
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -30,13 +35,29 @@ function App() {
     });
   }, []);
 
+  // Function to handle plan selection and show payment page
+  const handlePlanSelect = (planId: number) => {
+    setSelectedPlanId(planId);
+    setShowPaymentPage(true);
+  };
+
+  // Function to go back to main page
+  const handleBackToMain = () => {
+    setShowPaymentPage(false);
+  };
+
+  // If payment page is shown, render only the payment page
+  if (showPaymentPage) {
+    return <PaymentPage planId={selectedPlanId} onBack={handleBackToMain} />;
+  }
+
   return (
     <div className="font-['Inter',sans-serif] text-gray-800">
-      <Header />
+      <Header onPlanSelect={handlePlanSelect} />
       <Hero />
       <Features />
       <TestKnowledge />
-      <Plans />
+      <Plans onPlanSelect={handlePlanSelect} />
       <Testimonials />
       <WhyReflex />
       <CTA />

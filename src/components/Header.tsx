@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  onPlanSelect?: (planId: number) => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onPlanSelect }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {

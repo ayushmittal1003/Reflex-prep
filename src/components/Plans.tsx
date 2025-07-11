@@ -2,7 +2,20 @@ import React from 'react';
 import { CheckCircle2 } from 'lucide-react';
 import { PLANS } from '../utils/constants';
 
-const Plans: React.FC = () => {
+interface PlansProps {
+  onPlanSelect?: (planId: number) => void;
+}
+
+const Plans: React.FC<PlansProps> = ({ onPlanSelect }) => {
+  const handlePlanClick = (planId: number, originalLink: string) => {
+    if (onPlanSelect) {
+      onPlanSelect(planId);
+    } else {
+      // Fallback to original behavior
+      window.open(originalLink, '_blank');
+    }
+  };
+
   return (
     <section id="plans" className="py-16 md:py-24 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -72,9 +85,11 @@ const Plans: React.FC = () => {
                 </ul>
                 
                 <a
-                  href={plan.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handlePlanClick(plan.id, plan.link);
+                  }}
                   className={`block w-full text-center py-3 px-6 rounded-lg font-semibold transition-colors ${
                     plan.popular
                       ? 'bg-teal-500 hover:bg-teal-600 text-white'
