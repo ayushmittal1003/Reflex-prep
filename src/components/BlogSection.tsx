@@ -152,6 +152,23 @@ const BLOG_POSTS: BlogPost[] = [
 
 const CATEGORIES = ["All", "Strategy", "Study Tips", "Complete Guide", "Exam Updates", "Subject Strategy"];
 
+const formatDate = (dateString: string) => {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+
+const getTypeIcon = (type: string) => {
+  switch (type) {
+    case 'video': return <Play size={16} className="text-red-500" />;
+    case 'guide': return <BookOpen size={16} className="text-blue-500" />;
+    case 'tips': return <Star size={16} className="text-yellow-500" />;
+    default: return <BookOpen size={16} className="text-gray-500" />;
+  }
+};
+
 const BlogSection: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
@@ -201,23 +218,6 @@ const BlogSection: React.FC = () => {
         newSet.add(postId);
       }
       return newSet;
-    });
-  };
-
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case 'video': return <Play size={16} className="text-red-500" />;
-      case 'guide': return <BookOpen size={16} className="text-blue-500" />;
-      case 'tips': return <Star size={16} className="text-yellow-500" />;
-      default: return <BookOpen size={16} className="text-gray-500" />;
-    }
-  };
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
     });
   };
 
@@ -667,14 +667,5 @@ const BlogPostSkeleton: React.FC = () => (
     </div>
   </div>
 );
-
-const getTypeIcon = (type: string) => {
-  switch (type) {
-    case 'video': return <Play size={16} className="text-red-500" />;
-    case 'guide': return <BookOpen size={16} className="text-blue-500" />;
-    case 'tips': return <Star size={16} className="text-yellow-500" />;
-    default: return <BookOpen size={16} className="text-gray-500" />;
-  }
-};
 
 export default BlogSection;
