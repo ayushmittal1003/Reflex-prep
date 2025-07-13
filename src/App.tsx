@@ -9,6 +9,7 @@ import WhyReflex from './components/WhyReflex';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
 import TestKnowledge from './components/TestKnowledge';
+import BlogSection from './components/BlogSection';
 import PaymentPage from './components/PaymentPage';
 import LoginDashboard from './components/LoginDashboard';
 
@@ -73,6 +74,7 @@ function App() {
       <Plans onPlanSelect={handlePlanSelect} />
       <Testimonials />
       <WhyReflex />
+      <BlogSection />
       <CTA />
       <Footer />
     </div>
