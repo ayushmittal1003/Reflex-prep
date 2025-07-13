@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 interface HeaderProps {
   onPlanSelect?: (planId: number) => void;
+  onShowLogin?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onPlanSelect }) => {
+const Header: React.FC<HeaderProps> = ({ onPlanSelect, onShowLogin }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -46,12 +47,12 @@ const Header: React.FC<HeaderProps> = ({ onPlanSelect }) => {
           <NavLink href="#testimonials" isScrolled={isScrolled}>Testimonials</NavLink>
           <ExternalNavLink href="https://reflexprep.blog/" isScrolled={isScrolled}>Blogs</ExternalNavLink>
           <NavLink href="#why-reflex" isScrolled={isScrolled}>Why Us</NavLink>
-          <a
-            href="https://app.reflexprep.com/"
+          <button
+            onClick={onShowLogin}
             className="bg-gradient-to-r from-teal-500 to-blue-500 text-white px-4 py-2 rounded-md font-medium hover:opacity-90 transition-opacity"
           >
             Sign In
-          </a>
+          </button>
         </nav>
         
         <button className="block md:hidden">

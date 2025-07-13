@@ -2,7 +2,11 @@ import React from 'react';
 import { Download, ExternalLink, Star } from 'lucide-react';
 import { APP_LINKS } from '../utils/constants';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onShowLogin?: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onShowLogin }) => {
   return (
     <section className="relative pt-24 pb-16 lg:pb-24 overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-teal-800">
       {/* Background pattern */}
@@ -21,15 +25,13 @@ const Hero: React.FC = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
-              <a 
-                href="https://app.reflexprep.com/"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={onShowLogin}
                 className="bg-white text-blue-700 hover:bg-gray-100 transition-colors px-6 py-3 rounded-lg font-semibold flex items-center justify-center w-full sm:w-auto"
               >
                 <ExternalLink size={20} className="mr-2" />
                 Practice Questions Now
-              </a>
+              </button>
               
               <div className="flex items-center space-x-3">
                 <a 
