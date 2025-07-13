@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 interface HeaderProps {
   onPlanSelect?: (planId: number) => void;
   onShowLogin?: () => void;
+  onShowBlog?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onPlanSelect, onShowLogin }) => {
+const Header: React.FC<HeaderProps> = ({ onPlanSelect, onShowLogin, onShowBlog }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -45,7 +46,14 @@ const Header: React.FC<HeaderProps> = ({ onPlanSelect, onShowLogin }) => {
           <NavLink href="#features" isScrolled={isScrolled}>Features</NavLink>
           <NavLink href="#plans" isScrolled={isScrolled}>Plans</NavLink>
           <NavLink href="#testimonials" isScrolled={isScrolled}>Testimonials</NavLink>
-          <ExternalNavLink href="https://reflexprep.blog/" isScrolled={isScrolled}>Blogs</ExternalNavLink>
+          <button
+            onClick={onShowBlog}
+            className={`font-medium hover:text-teal-500 transition-colors duration-300 ${
+              isScrolled ? 'text-gray-700' : 'text-white'
+            }`}
+          >
+            Blogs
+          </button>
           <NavLink href="#why-reflex" isScrolled={isScrolled}>Why Us</NavLink>
           <button
             onClick={onShowLogin}
