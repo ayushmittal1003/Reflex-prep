@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { 
   Calendar, 
   Clock, 
@@ -9,7 +9,10 @@ import {
   Star, 
   Eye,
   Heart,
-  Share2
+  Share2,
+  Search,
+  Filter,
+  X
 } from 'lucide-react';
 
 interface BlogPost {
@@ -77,8 +80,58 @@ const BLOG_POSTS: BlogPost[] = [
     likes: 1234,
     featured: true,
     trending: false
+  },
+  {
+    id: 4,
+    title: "Subject-wise Preparation Strategy for NEET PG 2025",
+    excerpt: "Master each subject with our detailed preparation strategy tailored for NEET PG 2025 syllabus and exam pattern.",
+    author: "Dr. Anita Sharma",
+    authorImage: "https://images.pexels.com/photos/5452275/pexels-photo-5452275.jpeg?auto=compress&cs=tinysrgb&w=100",
+    publishDate: "2025-01-08",
+    readTime: "15 min read",
+    category: "Subject Strategy",
+    tags: ["NEET PG", "Subject-wise", "Strategy", "Preparation"],
+    image: "https://images.pexels.com/photos/4226085/pexels-photo-4226085.jpeg?auto=compress&cs=tinysrgb&w=800",
+    views: 14200,
+    likes: 789,
+    featured: false,
+    trending: false
+  },
+  {
+    id: 5,
+    title: "NEET PG Exam Pattern 2025: Everything You Need to Know",
+    excerpt: "Stay updated with the latest NEET PG exam pattern, marking scheme, and important changes for 2025.",
+    author: "Dr. Sneha Patel",
+    authorImage: "https://images.pexels.com/photos/5452268/pexels-photo-5452268.jpeg?auto=compress&cs=tinysrgb&w=100",
+    publishDate: "2025-01-05",
+    readTime: "7 min read",
+    category: "Exam Updates",
+    tags: ["NEET PG", "Exam Pattern", "2025", "Updates"],
+    image: "https://images.pexels.com/photos/4226256/pexels-photo-4226256.jpeg?auto=compress&cs=tinysrgb&w=800",
+    views: 22100,
+    likes: 1456,
+    featured: false,
+    trending: true
+  },
+  {
+    id: 6,
+    title: "How High-Yield Questions Can Transform Your NEET PG Preparation",
+    excerpt: "Learn why focusing on high-yield questions is the most effective strategy for NEET PG success and how to identify them.",
+    author: "Dr. Vikram Singh",
+    authorImage: "https://images.pexels.com/photos/5452299/pexels-photo-5452299.jpeg?auto=compress&cs=tinysrgb&w=100",
+    publishDate: "2025-01-03",
+    readTime: "9 min read",
+    category: "Study Strategy",
+    tags: ["High-Yield", "NEET PG", "Strategy", "Questions"],
+    image: "https://images.pexels.com/photos/4226119/pexels-photo-4226119.jpeg?auto=compress&cs=tinysrgb&w=800",
+    views: 16890,
+    likes: 923,
+    featured: false,
+    trending: false
   }
 ];
+
+const CATEGORIES = ["All", "Strategy", "Study Tips", "Complete Guide", "Exam Updates", "Subject Strategy", "Study Strategy"];
 
 const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString('en-US', {
@@ -89,14 +142,40 @@ const formatDate = (dateString: string) => {
 };
 
 const BlogSection: React.FC = () => {
-  const featuredPosts = BLOG_POSTS.filter(post => post.featured);
-  const trendingPosts = BLOG_POSTS.filter(post => post.trending).slice(0, 2);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [showFilters, setShowFilters] = useState(false);
+
+  // Filter and search logic
+  const filteredPosts = useMemo(() => {
+    return BLOG_POSTS.filter(post => {
+      const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
+      const matchesSearch = searchTerm === "" || 
+        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        post.author.toLowerCase().includes(searchTerm.toLowerCase());
+      
+      return matchesCategory && matchesSearch;
+    });
+  }, [searchTerm, selectedCategory]);
+
+  const featuredPosts = filteredPosts.filter(post => post.featured);
+  const trendingPosts = filteredPosts.filter(post => post.trending);
+  const regularPosts = filteredPosts.filter(post => !post.featured);
+
+  const clearFilters = () => {
+    setSearchTerm("");
+    setSelectedCategory("All");
+  };
+
+  const hasActiveFilters = searchTerm !== "" || selectedCategory !== "All";
 
   return (
     <section className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center max-w-4xl mx-auto mb-16">
+        <div className="text-center max-w-4xl mx-auto mb-12">
           <div className="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
             <BookOpen size={16} className="mr-2" />
             Knowledge Hub
@@ -109,77 +188,227 @@ const BlogSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Featured Posts */}
-        <div className="mb-16">
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="text-2xl font-bold text-gray-900 flex items-center">
-              <Star className="mr-2 text-yellow-500" size={24} />
-              Featured Articles
-            </h3>
-            <a 
-              href="https://reflexprep.blog/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-700 font-medium flex items-center"
-            >
-              View All <ArrowRight size={16} className="ml-1" />
-            </a>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {featuredPosts.map((post) => (
-              <FeaturedPostCard key={post.id} post={post} />
-            ))}
-          </div>
-        </div>
-
-        {/* Trending Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-              <TrendingUp className="mr-2 text-red-500" size={24} />
-              Trending Now
-            </h3>
-            <div className="space-y-6">
-              {trendingPosts.map((post) => (
-                <TrendingPostCard key={post.id} post={post} />
-              ))}
-            </div>
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Newsletter Signup */}
-            <div className="bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl p-6 text-white">
-              <h4 className="text-xl font-bold mb-3">Stay Updated</h4>
-              <p className="text-blue-100 mb-4 text-sm">
-                Get the latest NEET PG strategies and tips delivered to your inbox
-              </p>
-              <div className="space-y-3">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full px-4 py-2 rounded-lg text-gray-900 placeholder-gray-500"
-                />
-                <button className="w-full bg-white text-blue-600 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
-                  Subscribe
+        {/* Search and Filter Section */}
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-12 max-w-4xl mx-auto">
+          <div className="flex flex-col lg:flex-row gap-4 items-center">
+            {/* Search Bar */}
+            <div className="relative flex-1 max-w-md">
+              <Search size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search articles, tips, strategies..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+              />
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm("")}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  <X size={16} />
                 </button>
-              </div>
+              )}
             </div>
 
-            {/* Quick Links */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-              <h4 className="text-xl font-bold text-gray-900 mb-6">Quick Links</h4>
-              <div className="space-y-3">
-                <QuickLink href="https://app.reflexprep.com/" text="Practice Questions" />
-                <QuickLink href="https://app.reflexprep.com/" text="Mock Tests" />
-                <QuickLink href="https://app.reflexprep.com/" text="Study Notes" />
-                <QuickLink href="https://reflexprep.blog/" text="All Articles" />
+            {/* Filter Toggle */}
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className={`flex items-center space-x-2 px-4 py-3 rounded-xl font-medium transition-all duration-300 ${
+                showFilters || selectedCategory !== "All"
+                  ? 'bg-blue-500 text-white shadow-lg'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              <Filter size={20} />
+              <span>Filters</span>
+              {selectedCategory !== "All" && (
+                <span className="bg-white/20 px-2 py-1 rounded-full text-xs">1</span>
+              )}
+            </button>
+
+            {/* Clear Filters */}
+            {hasActiveFilters && (
+              <button
+                onClick={clearFilters}
+                className="text-red-500 hover:text-red-600 font-medium flex items-center space-x-1"
+              >
+                <X size={16} />
+                <span>Clear</span>
+              </button>
+            )}
+          </div>
+
+          {/* Category Filters */}
+          {showFilters && (
+            <div className="mt-6 pt-6 border-t border-gray-200">
+              <h4 className="text-sm font-medium text-gray-700 mb-3">Categories</h4>
+              <div className="flex flex-wrap gap-2">
+                {CATEGORIES.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                      selectedCategory === category
+                        ? 'bg-blue-500 text-white shadow-lg transform scale-105'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
               </div>
             </div>
-          </div>
+          )}
+
+          {/* Search Results Info */}
+          {(searchTerm || selectedCategory !== "All") && (
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <p className="text-sm text-gray-600">
+                {filteredPosts.length === 0 ? (
+                  <span className="text-red-500">No articles found matching your criteria</span>
+                ) : (
+                  <>
+                    Found <span className="font-semibold text-blue-600">{filteredPosts.length}</span> article{filteredPosts.length !== 1 ? 's' : ''}
+                    {searchTerm && <span> for "<span className="font-medium">{searchTerm}</span>"</span>}
+                    {selectedCategory !== "All" && <span> in <span className="font-medium">{selectedCategory}</span></span>}
+                  </>
+                )}
+              </p>
+            </div>
+          )}
         </div>
+
+        {/* No Results State */}
+        {filteredPosts.length === 0 ? (
+          <div className="text-center py-16">
+            <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Search size={32} className="text-gray-400" />
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">No Articles Found</h3>
+            <p className="text-gray-600 mb-6 max-w-md mx-auto">
+              We couldn't find any articles matching your search criteria. Try adjusting your filters or search terms.
+            </p>
+            <button
+              onClick={clearFilters}
+              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-medium transition-colors"
+            >
+              Clear All Filters
+            </button>
+          </div>
+        ) : (
+          <>
+            {/* Featured Posts */}
+            {featuredPosts.length > 0 && (
+              <div className="mb-16">
+                <div className="flex items-center justify-between mb-8">
+                  <h3 className="text-2xl font-bold text-gray-900 flex items-center">
+                    <Star className="mr-2 text-yellow-500" size={24} />
+                    Featured Articles
+                  </h3>
+                  <a 
+                    href="https://reflexprep.blog/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-700 font-medium flex items-center"
+                  >
+                    View All <ArrowRight size={16} className="ml-1" />
+                  </a>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {featuredPosts.slice(0, 2).map((post) => (
+                    <FeaturedPostCard key={post.id} post={post} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* All Posts Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Main Content */}
+              <div className="lg:col-span-2">
+                {trendingPosts.length > 0 && (
+                  <div className="mb-12">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                      <TrendingUp className="mr-2 text-red-500" size={24} />
+                      Trending Now
+                    </h3>
+                    <div className="space-y-6">
+                      {trendingPosts.map((post) => (
+                        <TrendingPostCard key={post.id} post={post} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Regular Posts */}
+                {regularPosts.length > 0 && (
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-6">More Articles</h3>
+                    <div className="grid grid-cols-1 gap-6">
+                      {regularPosts.map((post) => (
+                        <RegularPostCard key={post.id} post={post} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Sidebar */}
+              <div className="space-y-6">
+                {/* Newsletter Signup */}
+                <div className="bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl p-6 text-white">
+                  <h4 className="text-xl font-bold mb-3">Stay Updated</h4>
+                  <p className="text-blue-100 mb-4 text-sm">
+                    Get the latest NEET PG strategies and tips delivered to your inbox
+                  </p>
+                  <div className="space-y-3">
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      className="w-full px-4 py-2 rounded-lg text-gray-900 placeholder-gray-500"
+                    />
+                    <button className="w-full bg-white text-blue-600 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+                      Subscribe
+                    </button>
+                  </div>
+                </div>
+
+                {/* Quick Links */}
+                <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+                  <h4 className="text-xl font-bold text-gray-900 mb-6">Quick Links</h4>
+                  <div className="space-y-3">
+                    <QuickLink href="https://app.reflexprep.com/" text="Practice Questions" />
+                    <QuickLink href="https://app.reflexprep.com/" text="Mock Tests" />
+                    <QuickLink href="https://app.reflexprep.com/" text="Study Notes" />
+                    <QuickLink href="https://reflexprep.blog/" text="All Articles" />
+                  </div>
+                </div>
+
+                {/* Popular Categories */}
+                <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+                  <h4 className="text-xl font-bold text-gray-900 mb-6">Popular Categories</h4>
+                  <div className="space-y-2">
+                    {CATEGORIES.slice(1).map((category) => (
+                      <button
+                        key={category}
+                        onClick={() => setSelectedCategory(category)}
+                        className={`w-full text-left p-2 rounded-lg transition-colors ${
+                          selectedCategory === category
+                            ? 'bg-blue-50 text-blue-600 font-medium'
+                            : 'text-gray-700 hover:bg-gray-50'
+                        }`}
+                      >
+                        {category}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
 
         {/* CTA Section */}
         <div className="mt-20 bg-gradient-to-r from-blue-600 to-teal-600 rounded-3xl p-8 md:p-12 text-center text-white">
@@ -343,6 +572,44 @@ const TrendingPostCard: React.FC<PostCardProps> = ({ post }) => (
         >
           Read Article <ArrowRight size={12} className="ml-1" />
         </a>
+      </div>
+    </div>
+  </div>
+);
+
+const RegularPostCard: React.FC<PostCardProps> = ({ post }) => (
+  <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 group">
+    <div className="flex">
+      <div className="relative overflow-hidden w-24 h-20 flex-shrink-0">
+        <img 
+          src={post.image} 
+          alt={post.title}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+      </div>
+      
+      <div className="p-4 flex-1">
+        <div className="flex items-center space-x-2 mb-2">
+          <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium">
+            {post.category}
+          </span>
+        </div>
+        
+        <h4 className="text-base font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+          {post.title}
+        </h4>
+        
+        <div className="flex items-center justify-between text-xs text-gray-500">
+          <span>{formatDate(post.publishDate)}</span>
+          <a
+            href="https://reflexprep.blog/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-700 font-medium flex items-center"
+          >
+            Read <ArrowRight size={10} className="ml-1" />
+          </a>
+        </div>
       </div>
     </div>
   </div>
