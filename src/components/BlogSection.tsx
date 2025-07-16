@@ -172,34 +172,34 @@ const BlogSection: React.FC = () => {
   const hasActiveFilters = searchTerm !== "" || selectedCategory !== "All";
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+    <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center max-w-4xl mx-auto mb-12">
+        <div className="text-center max-w-4xl mx-auto mb-8 sm:mb-12">
           <div className="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
             <BookOpen size={16} className="mr-2" />
             Knowledge Hub
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 px-4 sm:px-0">
             Master NEET PG with Expert Insights
           </h2>
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed px-4 sm:px-0">
             Stay ahead with the latest strategies, tips, and insights from top medical educators and successful NEET PG rankers
           </p>
         </div>
 
         {/* Search and Filter Section */}
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-12 max-w-4xl mx-auto">
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 mb-8 sm:mb-12 max-w-4xl mx-auto">
           <div className="flex flex-col lg:flex-row gap-4 items-center">
             {/* Search Bar */}
-            <div className="relative flex-1 max-w-md">
+            <div className="relative flex-1 w-full lg:max-w-md">
               <Search size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search articles, tips, strategies..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                className="w-full pl-10 pr-4 py-2 sm:py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base"
               />
               {searchTerm && (
                 <button
@@ -218,7 +218,7 @@ const BlogSection: React.FC = () => {
                 showFilters || selectedCategory !== "All"
                   ? 'bg-blue-500 text-white shadow-lg'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+              } text-sm sm:text-base`}
             >
               <Filter size={20} />
               <span>Filters</span>
@@ -231,7 +231,7 @@ const BlogSection: React.FC = () => {
             {hasActiveFilters && (
               <button
                 onClick={clearFilters}
-                className="text-red-500 hover:text-red-600 font-medium flex items-center space-x-1"
+                className="text-red-500 hover:text-red-600 font-medium flex items-center space-x-1 text-sm sm:text-base"
               >
                 <X size={16} />
                 <span>Clear</span>
@@ -242,13 +242,13 @@ const BlogSection: React.FC = () => {
           {/* Category Filters */}
           {showFilters && (
             <div className="mt-6 pt-6 border-t border-gray-200">
-              <h4 className="text-sm font-medium text-gray-700 mb-3">Categories</h4>
-              <div className="flex flex-wrap gap-2">
+              <h4 className="text-xs sm:text-sm font-medium text-gray-700 mb-3">Categories</h4>
+              <div className="flex flex-wrap gap-1 sm:gap-2">
                 {CATEGORIES.map((category) => (
                   <button
                     key={category}
                     onClick={() => setSelectedCategory(category)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                    className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-medium transition-all duration-300 text-xs sm:text-sm ${
                       selectedCategory === category
                         ? 'bg-blue-500 text-white shadow-lg transform scale-105'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -264,7 +264,7 @@ const BlogSection: React.FC = () => {
           {/* Search Results Info */}
           {(searchTerm || selectedCategory !== "All") && (
             <div className="mt-4 pt-4 border-t border-gray-200">
-              <p className="text-sm text-gray-600">
+              <p className="text-xs sm:text-sm text-gray-600">
                 {filteredPosts.length === 0 ? (
                   <span className="text-red-500">No articles found matching your criteria</span>
                 ) : (
@@ -282,16 +282,16 @@ const BlogSection: React.FC = () => {
         {/* No Results State */}
         {filteredPosts.length === 0 ? (
           <div className="text-center py-16">
-            <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-16 sm:w-24 h-16 sm:h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
               <Search size={32} className="text-gray-400" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">No Articles Found</h3>
-            <p className="text-gray-600 mb-6 max-w-md mx-auto">
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">No Articles Found</h3>
+            <p className="text-sm sm:text-base text-gray-600 mb-6 max-w-md mx-auto px-4">
               We couldn't find any articles matching your search criteria. Try adjusting your filters or search terms.
             </p>
             <button
               onClick={clearFilters}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-medium transition-colors"
+              className="bg-blue-500 hover:bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-colors text-sm sm:text-base"
             >
               Clear All Filters
             </button>
@@ -301,8 +301,8 @@ const BlogSection: React.FC = () => {
             {/* Featured Posts */}
             {featuredPosts.length > 0 && (
               <div className="mb-16">
-                <div className="flex items-center justify-between mb-8">
-                  <h3 className="text-2xl font-bold text-gray-900 flex items-center">
+                <div className="flex items-center justify-between mb-6 sm:mb-8">
+                  <h3 className="text-lg sm:text-2xl font-bold text-gray-900 flex items-center">
                     <Star className="mr-2 text-yellow-500" size={24} />
                     Featured Articles
                   </h3>
@@ -310,13 +310,13 @@ const BlogSection: React.FC = () => {
                     href="https://reflexprep.blog/" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-blue-600 hover:text-blue-700 font-medium flex items-center"
+                    className="text-blue-600 hover:text-blue-700 font-medium flex items-center text-sm sm:text-base"
                   >
                     View All <ArrowRight size={16} className="ml-1" />
                   </a>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
                   {featuredPosts.slice(0, 2).map((post) => (
                     <FeaturedPostCard key={post.id} post={post} />
                   ))}
@@ -325,16 +325,16 @@ const BlogSection: React.FC = () => {
             )}
 
             {/* All Posts Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
               {/* Main Content */}
               <div className="lg:col-span-2">
                 {trendingPosts.length > 0 && (
-                  <div className="mb-12">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                  <div className="mb-8 sm:mb-12">
+                    <h3 className="text-lg sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 flex items-center">
                       <TrendingUp className="mr-2 text-red-500" size={24} />
                       Trending Now
                     </h3>
-                    <div className="space-y-6">
+                    <div className="space-y-4 sm:space-y-6">
                       {trendingPosts.map((post) => (
                         <TrendingPostCard key={post.id} post={post} />
                       ))}
@@ -345,8 +345,8 @@ const BlogSection: React.FC = () => {
                 {/* Regular Posts */}
                 {regularPosts.length > 0 && (
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-6">More Articles</h3>
-                    <div className="grid grid-cols-1 gap-6">
+                    <h3 className="text-lg sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">More Articles</h3>
+                    <div className="grid grid-cols-1 gap-4 sm:gap-6">
                       {regularPosts.map((post) => (
                         <RegularPostCard key={post.id} post={post} />
                       ))}
@@ -356,10 +356,10 @@ const BlogSection: React.FC = () => {
               </div>
 
               {/* Sidebar */}
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6 mt-8 lg:mt-0">
                 {/* Newsletter Signup */}
                 <div className="bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl p-6 text-white">
-                  <h4 className="text-xl font-bold mb-3">Stay Updated</h4>
+                  <h4 className="text-lg sm:text-xl font-bold mb-3">Stay Updated</h4>
                   <p className="text-blue-100 mb-4 text-sm">
                     Get the latest NEET PG strategies and tips delivered to your inbox
                   </p>
@@ -367,9 +367,9 @@ const BlogSection: React.FC = () => {
                     <input
                       type="email"
                       placeholder="Enter your email"
-                      className="w-full px-4 py-2 rounded-lg text-gray-900 placeholder-gray-500"
+                      className="w-full px-3 sm:px-4 py-2 rounded-lg text-gray-900 placeholder-gray-500 text-sm sm:text-base"
                     />
-                    <button className="w-full bg-white text-blue-600 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+                    <button className="w-full bg-white text-blue-600 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors text-sm sm:text-base">
                       Subscribe
                     </button>
                   </div>
@@ -377,7 +377,7 @@ const BlogSection: React.FC = () => {
 
                 {/* Quick Links */}
                 <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-                  <h4 className="text-xl font-bold text-gray-900 mb-6">Quick Links</h4>
+                  <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Quick Links</h4>
                   <div className="space-y-3">
                     <QuickLink href="https://app.reflexprep.com/" text="Practice Questions" />
                     <QuickLink href="https://app.reflexprep.com/" text="Mock Tests" />
@@ -388,13 +388,13 @@ const BlogSection: React.FC = () => {
 
                 {/* Popular Categories */}
                 <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-                  <h4 className="text-xl font-bold text-gray-900 mb-6">Popular Categories</h4>
+                  <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Popular Categories</h4>
                   <div className="space-y-2">
                     {CATEGORIES.slice(1).map((category) => (
                       <button
                         key={category}
                         onClick={() => setSelectedCategory(category)}
-                        className={`w-full text-left p-2 rounded-lg transition-colors ${
+                        className={`w-full text-left p-2 rounded-lg transition-colors text-sm sm:text-base ${
                           selectedCategory === category
                             ? 'bg-blue-50 text-blue-600 font-medium'
                             : 'text-gray-700 hover:bg-gray-50'
@@ -411,31 +411,31 @@ const BlogSection: React.FC = () => {
         )}
 
         {/* CTA Section */}
-        <div className="mt-20 bg-gradient-to-r from-blue-600 to-teal-600 rounded-3xl p-8 md:p-12 text-center text-white">
-          <h3 className="text-3xl md:text-4xl font-bold mb-4">
+        <div className="mt-16 sm:mt-20 bg-gradient-to-r from-blue-600 to-teal-600 rounded-3xl p-6 sm:p-8 md:p-12 text-center text-white">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             Ready to Transform Your NEET PG Preparation?
           </h3>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-blue-100 mb-6 sm:mb-8 max-w-2xl mx-auto px-4 sm:px-0">
             Join thousands of medical students who are already using our proven strategies and resources
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0">
             <a
               href="https://app.reflexprep.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center"
+              className="bg-white text-blue-600 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center text-sm sm:text-base"
             >
               Start Practicing Now
-              <ArrowRight size={20} className="ml-2" />
+              <ArrowRight size={18} className="ml-2" />
             </a>
             <a
               href="https://reflexprep.blog/"
               target="_blank"
               rel="noopener noreferrer"
-              className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-blue-600 transition-colors inline-flex items-center justify-center"
+              className="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-white hover:text-blue-600 transition-colors inline-flex items-center justify-center text-sm sm:text-base"
             >
               Explore All Articles
-              <BookOpen size={20} className="ml-2" />
+              <BookOpen size={18} className="ml-2" />
             </a>
           </div>
         </div>
@@ -450,19 +450,19 @@ interface PostCardProps {
 }
 
 const FeaturedPostCard: React.FC<PostCardProps> = ({ post }) => (
-  <div className="group bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+  <div className="group bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
     <div className="relative overflow-hidden">
       <img 
         src={post.image} 
         alt={post.title}
-        className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+        className="w-full h-40 sm:h-48 object-cover group-hover:scale-110 transition-transform duration-500"
       />
       <div className="absolute top-4 left-4 flex items-center space-x-2">
-        <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+        <span className="bg-blue-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs font-medium">
           {post.category}
         </span>
         {post.trending && (
-          <span className="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-medium flex items-center">
+          <span className="bg-red-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs font-medium flex items-center">
             <TrendingUp size={12} className="mr-1" />
             Trending
           </span>
@@ -470,16 +470,16 @@ const FeaturedPostCard: React.FC<PostCardProps> = ({ post }) => (
       </div>
     </div>
     
-    <div className="p-6">
-      <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors">
+    <div className="p-4 sm:p-6">
+      <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors">
         {post.title}
       </h3>
       
-      <p className="text-gray-600 mb-4 line-clamp-2">
+      <p className="text-sm sm:text-base text-gray-600 mb-4 line-clamp-2">
         {post.excerpt}
       </p>
       
-      <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+      <div className="flex items-center justify-between text-xs sm:text-sm text-gray-500 mb-4">
         <div className="flex items-center space-x-4">
           <div className="flex items-center">
             <Calendar size={14} className="mr-1" />
@@ -516,7 +516,7 @@ const FeaturedPostCard: React.FC<PostCardProps> = ({ post }) => (
           href="https://reflexprep.blog/"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-600 hover:text-blue-700 font-medium flex items-center text-sm"
+          className="text-blue-600 hover:text-blue-700 font-medium flex items-center text-xs sm:text-sm"
         >
           Read More <ArrowRight size={14} className="ml-1" />
         </a>
@@ -528,7 +528,7 @@ const FeaturedPostCard: React.FC<PostCardProps> = ({ post }) => (
 const TrendingPostCard: React.FC<PostCardProps> = ({ post }) => (
   <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 group">
     <div className="flex">
-      <div className="relative overflow-hidden w-32 h-24 flex-shrink-0">
+      <div className="relative overflow-hidden w-24 sm:w-32 h-20 sm:h-24 flex-shrink-0">
         <img 
           src={post.image} 
           alt={post.title}
@@ -542,12 +542,12 @@ const TrendingPostCard: React.FC<PostCardProps> = ({ post }) => (
         </div>
       </div>
       
-      <div className="p-4 flex-1">
-        <h4 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+      <div className="p-3 sm:p-4 flex-1">
+        <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
           {post.title}
         </h4>
         
-        <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
+        <div className="flex items-center justify-between text-xs text-gray-500 mb-2 flex-wrap gap-2">
           <div className="flex items-center space-x-3">
             <span>{formatDate(post.publishDate)}</span>
             <span>{post.readTime}</span>
@@ -568,7 +568,7 @@ const TrendingPostCard: React.FC<PostCardProps> = ({ post }) => (
           href="https://reflexprep.blog/"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-600 hover:text-blue-700 font-medium flex items-center text-sm"
+          className="text-blue-600 hover:text-blue-700 font-medium flex items-center text-xs sm:text-sm"
         >
           Read Article <ArrowRight size={12} className="ml-1" />
         </a>
@@ -580,7 +580,7 @@ const TrendingPostCard: React.FC<PostCardProps> = ({ post }) => (
 const RegularPostCard: React.FC<PostCardProps> = ({ post }) => (
   <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 group">
     <div className="flex">
-      <div className="relative overflow-hidden w-24 h-20 flex-shrink-0">
+      <div className="relative overflow-hidden w-20 sm:w-24 h-16 sm:h-20 flex-shrink-0">
         <img 
           src={post.image} 
           alt={post.title}
@@ -588,18 +588,18 @@ const RegularPostCard: React.FC<PostCardProps> = ({ post }) => (
         />
       </div>
       
-      <div className="p-4 flex-1">
+      <div className="p-3 sm:p-4 flex-1">
         <div className="flex items-center space-x-2 mb-2">
-          <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium">
+          <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap">
             {post.category}
           </span>
         </div>
         
-        <h4 className="text-base font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+        <h4 className="text-sm sm:text-base font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
           {post.title}
         </h4>
         
-        <div className="flex items-center justify-between text-xs text-gray-500">
+        <div className="flex items-center justify-between text-xs text-gray-500 flex-wrap gap-2">
           <span>{formatDate(post.publishDate)}</span>
           <a
             href="https://reflexprep.blog/"
@@ -620,9 +620,9 @@ const QuickLink: React.FC<{ href: string; text: string }> = ({ href, text }) => 
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-colors group"
+    className="flex items-center justify-between p-2 sm:p-3 rounded-lg hover:bg-gray-50 transition-colors group"
   >
-    <span className="text-gray-700 group-hover:text-blue-600">{text}</span>
+    <span className="text-gray-700 group-hover:text-blue-600 text-sm sm:text-base">{text}</span>
     <ArrowRight size={14} className="text-gray-400 group-hover:text-blue-600" />
   </a>
 );
