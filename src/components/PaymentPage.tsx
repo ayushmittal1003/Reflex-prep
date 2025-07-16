@@ -128,7 +128,7 @@ const PaymentPage: React.FC<PaymentPageProps> = ({ planId = 1, onBack }) => {
                           value={formData.couponCode}
                           onChange={handleInputChange}
                           placeholder="Enter coupon code"
-                          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent scrollbar-hide"
                         />
                         <button
                           onClick={handleCouponApply}
@@ -161,7 +161,7 @@ const PaymentPage: React.FC<PaymentPageProps> = ({ planId = 1, onBack }) => {
                           value={formData.fullName}
                           onChange={handleInputChange}
                           placeholder="Enter your full name"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent scrollbar-hide"
                           required
                         />
                       </div>
@@ -176,7 +176,7 @@ const PaymentPage: React.FC<PaymentPageProps> = ({ planId = 1, onBack }) => {
                           value={formData.email}
                           onChange={handleInputChange}
                           placeholder="Enter your email"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent scrollbar-hide"
                           required
                         />
                       </div>
@@ -195,7 +195,7 @@ const PaymentPage: React.FC<PaymentPageProps> = ({ planId = 1, onBack }) => {
                             value={formData.mobile}
                             onChange={handleInputChange}
                             placeholder="Enter phone number"
-                            className="flex-1 px-4 py-3 border border-gray-300 rounded-r-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                            className="flex-1 px-4 py-3 border border-gray-300 rounded-r-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent scrollbar-hide"
                             required
                           />
                         </div>
@@ -211,7 +211,7 @@ const PaymentPage: React.FC<PaymentPageProps> = ({ planId = 1, onBack }) => {
                           value={formData.pincode}
                           onChange={handleInputChange}
                           placeholder="Enter pincode"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent scrollbar-hide"
                           required
                         />
                       </div>

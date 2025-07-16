@@ -208,7 +208,7 @@ const BlogPage: React.FC<BlogPageProps> = ({ onBack }) => {
                   <img 
                     src="/image.png" 
                     alt="Reflex Logo" 
-                    className="w-full h-full object-contain"
+                    className="w-full px-4 py-2 rounded-lg text-gray-900 placeholder-gray-500 scrollbar-hide"
                   />
                 </div>
                 <span className="font-bold text-xl text-gray-800">Reflex</span>
