@@ -26,7 +26,7 @@ const Hero: React.FC<HeroProps> = ({ onShowLogin }) => {
             
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-3 sm:space-y-0 sm:space-x-3 mb-6 px-2 sm:px-0">
               <button
-                onClick={onShowLogin}
+                onClick={() => window.open('https://app.reflexprep.com/', '_blank')}
                 className="bg-white text-blue-700 hover:bg-gray-100 transition-colors px-4 sm:px-6 py-3 rounded-lg font-semibold flex items-center justify-center w-full sm:w-auto text-sm sm:text-base"
               >
                 <ExternalLink size={18} className="mr-2" />

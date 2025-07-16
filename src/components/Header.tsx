@@ -114,7 +114,7 @@ const Header: React.FC<HeaderProps> = ({ onPlanSelect, onShowLogin, onShowBlog }
                 isScrolled ? 'text-gray-700' : 'text-white'
               }`}
             >
-              Blogs
+              Blog
             </button>
             <NavLink href="#why-reflex" isScrolled={isScrolled}>Why Us</NavLink>
             <button
@@ -194,7 +194,7 @@ const Header: React.FC<HeaderProps> = ({ onPlanSelect, onShowLogin, onShowBlog }
                     href="#" 
                     onClick={handleBlogClick}
                   >
-                    Blogs
+                    Blog
                   </MobileNavLink>
                   <MobileNavLink 
                     href="#why-reflex" 

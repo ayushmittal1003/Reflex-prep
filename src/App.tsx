@@ -9,15 +9,10 @@ import WhyReflex from './components/WhyReflex';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
 import TestKnowledge from './components/TestKnowledge';
-import BlogSection from './components/BlogSection';
-import BlogPage from './components/BlogPage';
 import PaymentPage from './components/PaymentPage';
-import LoginDashboard from './components/LoginDashboard';
 
 function App() {
   const [showPaymentPage, setShowPaymentPage] = useState(false);
-  const [showLoginDashboard, setShowLoginDashboard] = useState(false);
-  const [showBlogPage, setShowBlogPage] = useState(false);
   const [selectedPlanId, setSelectedPlanId] = useState<number>(1);
 
   useEffect(() => {
@@ -49,18 +44,16 @@ function App() {
   // Function to go back to main page
   const handleBackToMain = () => {
     setShowPaymentPage(false);
-    setShowLoginDashboard(false);
-    setShowBlogPage(false);
   };
 
-  // Function to show login dashboard
-  const handleShowLoginDashboard = () => {
-    setShowLoginDashboard(true);
+  // Function to redirect to practice app
+  const handleShowPractice = () => {
+    window.open('https://app.reflexprep.com/', '_blank');
   };
 
-  // Function to show blog page
+  // Function to redirect to blog
   const handleShowBlogPage = () => {
-    setShowBlogPage(true);
+    window.open('https://reflexprep.blog/', '_blank');
   };
 
   // If payment page is shown, render only the payment page
@@ -68,26 +61,15 @@ function App() {
     return <PaymentPage planId={selectedPlanId} onBack={handleBackToMain} />;
   }
 
-  // If login dashboard is shown, render only the login dashboard
-  if (showLoginDashboard) {
-    return <LoginDashboard onBack={handleBackToMain} />;
-  }
-
-  // If blog page is shown, render only the blog page
-  if (showBlogPage) {
-    return <BlogPage onBack={handleBackToMain} />;
-  }
-
   return (
     <div className="font-['Inter',sans-serif] text-gray-800">
-      <Header onPlanSelect={handlePlanSelect} onShowLogin={handleShowLoginDashboard} onShowBlog={handleShowBlogPage} />
-      <Hero onShowLogin={handleShowLoginDashboard} />
+      <Header onPlanSelect={handlePlanSelect} onShowLogin={handleShowPractice} onShowBlog={handleShowBlogPage} />
+      <Hero onShowLogin={handleShowPractice} />
       <Features />
       <TestKnowledge />
       <Plans onPlanSelect={handlePlanSelect} />
       <Testimonials />
       <WhyReflex />
-      <BlogSection />
       <CTA />
       <Footer />
     </div>

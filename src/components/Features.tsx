@@ -110,12 +110,9 @@ const Features: React.FC = () => {
                   </div>
                   
                   <a
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      // This would trigger the login dashboard if we had access to the function
-                      window.open('https://app.reflexprep.com/', '_blank');
-                    }}
+                    href="https://app.reflexprep.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="mt-4 w-full bg-teal-500 text-white py-2 rounded-lg font-medium block text-center hover:bg-teal-600 transition-colors text-sm"
                   >
                     Start Practicing

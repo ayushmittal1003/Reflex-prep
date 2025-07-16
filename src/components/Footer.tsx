@@ -122,12 +122,14 @@ const Footer: React.FC = () => {
               <li><a href="#why-reflex" className="hover:text-teal-400 transition-colors block py-1">Why Choose Us</a></li>
               
               <li className="pt-2">
-                <button
-                  onClick={() => window.open(APP_LINKS.WEB_APP, '_blank')}
+                <a
+                  href={APP_LINKS.WEB_APP}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-teal-500 hover:bg-teal-600 text-white transition-colors px-3 sm:px-4 py-2 rounded inline-block mt-2 text-sm sm:text-base"
                 >
                   Sign In
-                </button>
+                </a>
               </li>
             </ul>
           </div>
