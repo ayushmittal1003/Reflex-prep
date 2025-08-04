@@ -10,6 +10,7 @@ import WhyReflex from './components/WhyReflex';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
 import TestKnowledge from './components/TestKnowledge';
+import AIForDoctors from './components/AIForDoctors';
 
 // Import your TOS page component
 import TosPage from '.././src/tos/page' // create this component as a separate file
@@ -59,6 +60,9 @@ function App() {
 
         {/* TOS page route */}
         <Route path="/tos" element={<TosPage />} />
+
+        {/* AI for Doctors page route */}
+        <Route path="/ai-for-doctors" element={<AIForDoctors />} />
 
         {/* You can add more routes here as needed */}
       </Routes>

@@ -119,6 +119,7 @@ const Footer: React.FC = () => {
               <li><a href="#features" className="hover:text-teal-400 transition-colors block py-1">Features</a></li>
               <li><a href="#plans" className="hover:text-teal-400 transition-colors block py-1">Plans</a></li>
               <li><a href="#testimonials" className="hover:text-teal-400 transition-colors block py-1">Testimonials</a></li>
+              <li><a href="/ai-for-doctors" className="hover:text-teal-400 transition-colors block py-1">AI for Doctors</a></li>
               <li><a href="#why-reflex" className="hover:text-teal-400 transition-colors block py-1">Why Choose Us</a></li>
               
               <li className="pt-2">

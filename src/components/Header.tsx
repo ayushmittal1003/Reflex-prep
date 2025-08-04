@@ -49,7 +49,11 @@ const Header: React.FC<HeaderProps> = ({ onPlanSelect, onShowLogin, onShowBlog }
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
     
-    if (href.startsWith('#')) {
+    if (href.startsWith('/')) {
+      // Handle internal routes
+      window.location.href = href;
+    } else if (href.startsWith('#')) {
+      // Handle anchor links
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ 
@@ -108,6 +112,7 @@ const Header: React.FC<HeaderProps> = ({ onPlanSelect, onShowLogin, onShowBlog }
             <NavLink href="#features" isScrolled={isScrolled}>Features</NavLink>
             <NavLink href="#plans" isScrolled={isScrolled}>Plans</NavLink>
             <NavLink href="#testimonials" isScrolled={isScrolled}>Testimonials</NavLink>
+            <NavLink href="/ai-for-doctors" isScrolled={isScrolled}>AI for Doctors</NavLink>
             <button
               onClick={onShowBlog}
               className={`font-medium hover:text-teal-500 transition-colors duration-300 ${
@@ -197,6 +202,12 @@ const Header: React.FC<HeaderProps> = ({ onPlanSelect, onShowLogin, onShowBlog }
                     Blogs
                   </MobileNavLink>
                   <MobileNavLink 
+                    href="/ai-for-doctors" 
+                    onClick={() => handleNavClick('/ai-for-doctors')}
+                  >
+                    AI for Doctors
+                  </MobileNavLink>
+                  <MobileNavLink 
                     href="https://reflexprep.blog/" 
                     onClick={() => handleNavClick('#why-reflex')}
                   >
@@ -267,12 +278,19 @@ interface NavLinkProps {
 const NavLink: React.FC<NavLinkProps> = ({ href, children, isScrolled }) => {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
+    
+    // Check if it's an internal route (starts with /)
+    if (href.startsWith('/')) {
+      window.location.href = href;
+    } else {
+      // Handle anchor links
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
     }
   };
 
