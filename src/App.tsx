@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
-import LimitedTimeBanner from './components/LimitedTimeBanner';
+import MovingBanner from './components/MovingBanner';
 import Hero from './components/Hero';
 import Plans from './components/Plans';
 import Features from './components/Features';
@@ -39,9 +39,9 @@ function HomePage() {
 
   return (
     <div className="font-['Inter',sans-serif] text-gray-800">
-      <LimitedTimeBanner />
       <Header />
       <Hero />
+      <MovingBanner />
       <Features />
       <TestKnowledge />
       <Plans />
