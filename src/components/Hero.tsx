@@ -143,7 +143,7 @@ const Hero: React.FC<HeroProps> = ({ onShowLogin }) => {
       </div>
       
       {/* Wave shape divider */}
-    <div className="absolute bottom-0 left-0 right-0">
+    <div className="absolute bottom-0 left-0 right-0 z-20">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 150" className="w-full h-auto">
     <path
       fill="#ffffff"
