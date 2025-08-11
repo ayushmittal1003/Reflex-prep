@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, Calendar, Clock, User, Share2 } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, User, Share2, Eye, Tag } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface BlogPostProps {
@@ -11,9 +11,11 @@ const BlogPost: React.FC<BlogPostProps> = ({ postId }) => {
     'shadow-under-stethoscope': {
       title: 'Shadow Under The Stethoscope',
       author: 'Dr. Reflex Team',
-      date: 'January 15, 2025',
+      date: '15/01/2025 14:30',
       readTime: '8 min read',
+      views: '1.2k views',
       category: 'Medical Journey',
+      tags: ['medical', 'journey', 'challenges'],
       image: 'https://images.pexels.com/photos/4173251/pexels-photo-4173251.jpeg?auto=compress&cs=tinysrgb&w=1200',
       content: `
         <p class="text-lg leading-relaxed mb-6">The medical profession is often romanticized in popular culture, but behind every white coat lies a complex tapestry of challenges, sacrifices, and profound human experiences that rarely see the light of day.</p>
@@ -58,9 +60,11 @@ const BlogPost: React.FC<BlogPostProps> = ({ postId }) => {
     'second-shot': {
       title: 'Second Shot: Your Path to NEET PG Success',
       author: 'Dr. Reflex Team',
-      date: 'January 10, 2025',
+      date: '10/01/2025 09:15',
       readTime: '12 min read',
+      views: '2.1k views',
       category: 'NEET PG Strategy',
+      tags: ['neet-pg', 'strategy', 'second-attempt'],
       image: 'https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=1200',
       content: `
         <p class="text-lg leading-relaxed mb-6">Taking a second attempt at NEET PG can feel overwhelming, but it's also an opportunity to come back stronger, wiser, and more prepared than ever before. This comprehensive guide will help you navigate your second shot with confidence and strategy.</p>
@@ -166,11 +170,12 @@ const BlogPost: React.FC<BlogPostProps> = ({ postId }) => {
 
   if (!post) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Post Not Found</h1>
-          <Link to="/blog" className="text-blue-600 hover:text-blue-800">
-            ← Back to Blog
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Bài viết không tìm thấy</h1>
+          <Link to="/blog" className="text-blue-600 hover:text-blue-800 inline-flex items-center">
+            <ArrowLeft size={16} className="mr-1" />
+            Quay lại Blog
           </Link>
         </div>
       </div>
@@ -178,73 +183,84 @@ const BlogPost: React.FC<BlogPostProps> = ({ postId }) => {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="pt-24 pb-8 bg-gradient-to-br from-blue-900 via-blue-800 to-teal-800 text-white">
-        <div className="container mx-auto px-4">
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="container mx-auto px-4 py-6">
           <div className="max-w-4xl mx-auto">
             {/* Back Button */}
             <Link 
               to="/blog"
-              className="inline-flex items-center text-blue-200 hover:text-white mb-8 transition-colors"
+              className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-6 transition-colors"
             >
               <ArrowLeft size={20} className="mr-2" />
-              Back to Blog
+              Quay lại Blog
             </Link>
 
             {/* Category Badge */}
             <div className="mb-4">
-              <span className="bg-gradient-to-r from-teal-500 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium">
+              <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
                 {post.category}
               </span>
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
               {post.title}
             </h1>
 
             {/* Meta Information */}
-            <div className="flex flex-wrap items-center text-blue-200 mb-8 space-x-6">
+            <div className="flex flex-wrap items-center text-gray-600 mb-6 space-x-6">
               <div className="flex items-center">
-                <User size={18} className="mr-2" />
-                <span>{post.author}</span>
+                <User size={16} className="mr-2" />
+                <span className="text-sm">{post.author}</span>
               </div>
               <div className="flex items-center">
-                <Calendar size={18} className="mr-2" />
-                <span>{post.date}</span>
+                <Calendar size={16} className="mr-2" />
+                <span className="text-sm">{post.date}</span>
               </div>
               <div className="flex items-center">
-                <Clock size={18} className="mr-2" />
-                <span>{post.readTime}</span>
+                <Clock size={16} className="mr-2" />
+                <span className="text-sm">{post.readTime}</span>
               </div>
-              <button className="flex items-center hover:text-white transition-colors">
-                <Share2 size={18} className="mr-2" />
-                <span>Share</span>
-              </button>
+              <div className="flex items-center">
+                <Eye size={16} className="mr-2" />
+                <span className="text-sm">{post.views}</span>
+              </div>
+            </div>
+
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2 mb-6">
+              {post.tags.map((tag) => (
+                <span 
+                  key={tag}
+                  className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm flex items-center"
+                >
+                  <Tag size={12} className="mr-1" />
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Featured Image */}
-      <section className="relative">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto -mt-16 relative z-10">
-            <div className="bg-white p-4 rounded-2xl shadow-2xl">
-              <img 
-                src={post.image}
-                alt={post.title}
-                className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-xl"
-              />
-            </div>
+      <div className="bg-white">
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-4xl mx-auto">
+            <img 
+              src={post.image}
+              alt={post.title}
+              className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-xl shadow-lg"
+            />
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Article Content */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
+      <div className="bg-white">
+        <div className="container mx-auto px-4 py-12">
           <div className="max-w-4xl mx-auto">
             <article className="prose prose-lg max-w-none">
               <div 
@@ -257,12 +273,12 @@ const BlogPost: React.FC<BlogPostProps> = ({ postId }) => {
             <div className="mt-12 pt-8 border-t border-gray-200">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Found this helpful?</h3>
-                  <p className="text-gray-600">Share it with your fellow medical students</p>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Bài viết hữu ích?</h3>
+                  <p className="text-gray-600">Chia sẻ với bạn bè cùng ngành y</p>
                 </div>
-                <button className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center">
+                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors flex items-center">
                   <Share2 size={18} className="mr-2" />
-                  Share Article
+                  Chia sẻ
                 </button>
               </div>
             </div>
@@ -271,15 +287,15 @@ const BlogPost: React.FC<BlogPostProps> = ({ postId }) => {
             <div className="mt-12 text-center">
               <Link 
                 to="/blog"
-                className="inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-800 px-6 py-3 rounded-xl font-semibold transition-colors"
+                className="inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-800 px-6 py-3 rounded-lg font-semibold transition-colors"
               >
                 <ArrowLeft size={18} className="mr-2" />
-                Back to All Articles
+                Quay lại tất cả bài viết
               </Link>
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };
