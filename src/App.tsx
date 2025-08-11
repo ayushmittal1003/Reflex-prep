@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
-import MovingBanner from './components/MovingBanner';
 import Hero from './components/Hero';
 import Plans from './components/Plans';
 import Features from './components/Features';
@@ -15,6 +14,8 @@ import AIForDoctors from './components/AIForDoctors';
 
 // Import your TOS page component
 import TosPage from '.././src/tos/page' // create this component as a separate file
+import BlogPage from './components/BlogPage';
+import BlogPost from './components/BlogPost';
 
 function HomePage() {
   useEffect(() => {
@@ -41,10 +42,9 @@ function HomePage() {
     <div className="font-['Inter',sans-serif] text-gray-800">
       <Header />
       <Hero />
-      <MovingBanner />
+      <Plans />
       <Features />
       <TestKnowledge />
-      <Plans />
       <Testimonials />
       <WhyReflex />
       <CTA />
@@ -65,6 +65,11 @@ function App() {
 
         {/* AI for Doctors page route */}
         <Route path="/ai-for-doctors" element={<AIForDoctors />} />
+
+        {/* Blog routes */}
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/shadow-under-stethoscope" element={<BlogPost postId="shadow-under-stethoscope" />} />
+        <Route path="/blog/second-shot" element={<BlogPost postId="second-shot" />} />
 
         {/* You can add more routes here as needed */}
       </Routes>
