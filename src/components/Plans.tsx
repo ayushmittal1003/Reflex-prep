@@ -65,8 +65,32 @@ const Plans: React.FC<PlansProps> = ({ onPlanSelect }) => {
               }`}>
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">{plan.title}</h3>
                 <div className="mb-4">
-                  <span className="text-2xl sm:text-3xl font-bold text-gray-900">₹{plan.price}</span>
-                  <span className="text-sm sm:text-base text-gray-500 ml-1">/ {plan.duration} months</span>
+                  {plan.originalPrice ? (
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg text-gray-500 line-through">₹{plan.originalPrice}</span>
+                        <span className="bg-red-100 text-red-600 text-xs px-2 py-1 rounded-full font-medium">
+                          ₹{plan.discount} OFF
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-2xl sm:text-3xl font-bold text-gray-900">₹{plan.price}</span>
+                        <span className="text-sm sm:text-base text-gray-500 ml-1">/ {plan.duration} months</span>
+                      </div>
+                      {plan.couponCode && (
+                        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-2 mt-2">
+                          <div className="text-xs font-medium text-yellow-800 text-center">
+                            Use code: <span className="font-bold">{plan.couponCode}</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div>
+                      <span className="text-2xl sm:text-3xl font-bold text-gray-900">₹{plan.price}</span>
+                      <span className="text-sm sm:text-base text-gray-500 ml-1">/ {plan.duration} months</span>
+                    </div>
+                  )}
                 </div>
                 
                 <ul className="space-y-2 sm:space-y-3 mb-6">

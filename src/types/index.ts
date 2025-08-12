@@ -3,6 +3,9 @@ export interface Plan {
   title: string;
   duration: number;
   price: number;
+  originalPrice?: number;
+  discount?: number;
+  couponCode?: string;
   features: string[];
   buttonText: string;
   link: string;

@@ -54,7 +54,7 @@ const PromotionalPopup: React.FC<PromotionalPopupProps> = ({ onClose }) => {
           
           <div className="relative z-10">
             <div className="text-sm font-medium text-blue-100 mb-2">LIMITED TIME OFFER</div>
-            <div className="text-4xl font-bold mb-2">₹500 OFF</div>
+            <div className="text-4xl font-bold mb-2">₹550 OFF</div>
             <div className="text-lg text-blue-100">On 2 Year, 3 Year & 4 Year Plans</div>
           </div>
         </div>
@@ -66,7 +66,7 @@ const PromotionalPopup: React.FC<PromotionalPopupProps> = ({ onClose }) => {
             
             <div className="flex items-center justify-center gap-3">
               <div className="bg-blue-50 border-2 border-dashed border-blue-300 rounded-xl px-6 py-3">
-                <span className="text-2xl font-bold text-blue-600">GRAB500</span>
+                <span className="text-2xl font-bold text-blue-600">GRAB550</span>
               </div>
               
               <button
@@ -102,3 +102,4 @@ const PromotionalPopup: React.FC<PromotionalPopupProps> = ({ onClose }) => {
 };
 
 export default PromotionalPopup;
+      await navigator.clipboard.writeText('GRAB550');
