@@ -11,6 +11,7 @@ import CTA from './components/CTA';
 import Footer from './components/Footer';
 import TestKnowledge from './components/TestKnowledge';
 import AIForDoctors from './components/AIForDoctors';
+import PromotionalPopup from './components/PromotionalPopup';
 
 // Import your TOS page component
 import TosPage from '.././src/tos/page' // create this component as a separate file
@@ -18,6 +19,8 @@ import BlogPage from './components/BlogPage';
 import BlogPost from './components/BlogPost';
 
 function HomePage() {
+  const [showPopup, setShowPopup] = React.useState(false);
+
   useEffect(() => {
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -36,6 +39,13 @@ function HomePage() {
         });
       });
     });
+
+    // Show popup after a short delay
+    const popupTimer = setTimeout(() => {
+      setShowPopup(true);
+    }, 2000); // Show after 2 seconds
+
+    return () => clearTimeout(popupTimer);
   }, []);
 
   return (
@@ -49,6 +59,11 @@ function HomePage() {
       <WhyReflex />
       <CTA />
       <Footer />
+      
+      {/* Promotional Popup */}
+      {showPopup && (
+        <PromotionalPopup onClose={() => setShowPopup(false)} />
+      )}
     </div>
   );
 }
