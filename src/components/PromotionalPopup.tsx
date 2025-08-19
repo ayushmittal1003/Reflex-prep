@@ -7,19 +7,29 @@ interface PromotionalPopupProps {
 
 const PromotionalPopup: React.FC<PromotionalPopupProps> = ({ onClose }) => {
   const [copied, setCopied] = useState(false);
+  const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     // Auto-close after 5 seconds
     const timer = setTimeout(() => {
       onClose();
     }, 5000);
+    setTimerId(timer);
 
-    return () => clearTimeout(timer);
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, [onClose]);
 
   const handleCopyCode = async () => {
+    // Clear the auto-close timer to keep document focused
+    if (timerId) {
+      clearTimeout(timerId);
+      setTimerId(null);
+    }
+    
     try {
-      await navigator.clipboard.writeText('GRAB500');
+      await navigator.clipboard.writeText('GRAB550');
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
