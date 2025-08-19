@@ -22,18 +22,34 @@ const PromotionalPopup: React.FC<PromotionalPopupProps> = ({ onClose }) => {
   }, [onClose]);
 
   const handleCopyCode = async () => {
-    // Clear the auto-close timer to keep document focused
+    // Clear auto-close timer
     if (timerId) {
       clearTimeout(timerId);
       setTimerId(null);
     }
-    
+
     try {
-      await navigator.clipboard.writeText('GRAB550');
+      // Ensure window is focused
+      if (!document.hasFocus()) {
+        window.focus();
+      }
+
+      await navigator.clipboard.writeText("GRAB550");
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy text: ', err);
+      console.warn("Clipboard API failed, using fallback:", err);
+
+      // Fallback method
+      const textarea = document.createElement("textarea");
+      textarea.value = "GRAB550";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     }
   };
 
@@ -112,4 +128,3 @@ const PromotionalPopup: React.FC<PromotionalPopupProps> = ({ onClose }) => {
 };
 
 export default PromotionalPopup;
-      await navigator.clipboard.writeText('GRAB550');
