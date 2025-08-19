@@ -29,11 +29,6 @@ const PromotionalPopup: React.FC<PromotionalPopupProps> = ({ onClose }) => {
     }
 
     try {
-      // Ensure window is focused
-      if (!document.hasFocus()) {
-        window.focus();
-      }
-
       await navigator.clipboard.writeText("GRAB550");
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
