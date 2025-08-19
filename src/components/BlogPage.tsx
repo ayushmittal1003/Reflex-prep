@@ -29,54 +29,6 @@ const BlogPage: React.FC = () => {
       views: '2.1k views',
       category: 'NEET PG Strategy',
       tags: ['neet-pg', 'strategy', 'second-attempt']
-    },
-    {
-      id: 'pyq-mastery',
-      title: 'Mastering PYQs: The Ultimate Strategy',
-      excerpt: 'Learn how to effectively use Previous Year Questions to maximize your NEET PG preparation and boost your scores.',
-      image: 'https://images.pexels.com/photos/4226140/pexels-photo-4226140.jpeg?auto=compress&cs=tinysrgb&w=800',
-      author: 'Dr. Reflex Team',
-      date: '05/01/2025 16:45',
-      readTime: '10 min read',
-      views: '3.5k views',
-      category: 'Study Tips',
-      tags: ['pyq', 'preparation', 'strategy']
-    },
-    {
-      id: 'time-management',
-      title: 'Time Management for Medical Students',
-      excerpt: 'Effective time management techniques specifically designed for medical students juggling studies, clinical work, and personal life.',
-      image: 'https://images.pexels.com/photos/4386321/pexels-photo-4386321.jpeg?auto=compress&cs=tinysrgb&w=800',
-      author: 'Dr. Reflex Team',
-      date: '28/12/2024 11:20',
-      readTime: '7 min read',
-      views: '1.8k views',
-      category: 'Productivity',
-      tags: ['time-management', 'productivity', 'study-tips']
-    },
-    {
-      id: 'clinical-rotations',
-      title: 'Making the Most of Clinical Rotations',
-      excerpt: 'Tips and strategies to excel during your clinical rotations and build strong foundations for your medical career.',
-      image: 'https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?auto=compress&cs=tinysrgb&w=800',
-      author: 'Dr. Reflex Team',
-      date: '22/12/2024 13:30',
-      readTime: '9 min read',
-      views: '1.4k views',
-      category: 'Clinical Skills',
-      tags: ['clinical', 'rotations', 'medical-training']
-    },
-    {
-      id: 'mental-health',
-      title: 'Mental Health in Medical School',
-      excerpt: 'Addressing the mental health challenges faced by medical students and providing practical solutions for wellbeing.',
-      image: 'https://images.pexels.com/photos/4101143/pexels-photo-4101143.jpeg?auto=compress&cs=tinysrgb&w=800',
-      author: 'Dr. Reflex Team',
-      date: '18/12/2024 08:45',
-      readTime: '11 min read',
-      views: '2.7k views',
-      category: 'Mental Health',
-      tags: ['mental-health', 'wellbeing', 'stress-management']
     }
   ];
 
@@ -94,7 +46,7 @@ const BlogPage: React.FC = () => {
           <div className="max-w-6xl mx-auto">
             <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">Blog</h1>
             <p className="text-lg text-gray-600 mb-8">
-              Ở đây bạn có thể tìm thấy tất cả các bài viết của chúng tôi về y học và chuẩn bị NEET PG
+              Here you can find all our articles about medicine and NEET PG preparation
             </p>
             
             {/* Search Bar */}
@@ -102,7 +54,7 @@ const BlogPage: React.FC = () => {
               <Search size={20} className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
-                placeholder="Tìm kiếm bài viết..."
+                placeholder="Search articles..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
@@ -176,7 +128,7 @@ const BlogPage: React.FC = () => {
                     to={`/blog/${post.id}`}
                     className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors group/link"
                   >
-                    <span>Đọc thêm</span>
+                    <span>Read More</span>
                     <ArrowRight size={14} className="ml-1 group-hover/link:translate-x-1 transition-transform" />
                   </Link>
                 </div>
@@ -190,8 +142,8 @@ const BlogPage: React.FC = () => {
               <div className="text-gray-400 mb-4">
                 <Search size={48} className="mx-auto" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Không tìm thấy bài viết</h3>
-              <p className="text-gray-600">Thử tìm kiếm với từ khóa khác</p>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No articles found</h3>
+              <p className="text-gray-600">Try searching with different keywords</p>
             </div>
           )}
         </div>
