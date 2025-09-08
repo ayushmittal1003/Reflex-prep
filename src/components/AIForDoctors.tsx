@@ -150,6 +150,55 @@ const AIForDoctors: React.FC = () => {
                   </div>
                 </div>
                 
+                {/* Instructors Section for Elevate */}
+                <div className="p-8 border-t border-blue-200">
+                  <h4 className="text-xl font-bold text-gray-900 mb-6 text-center">Sessions are led by</h4>
+                  
+                  <div className="space-y-6">
+                    {/* AI Expert */}
+                    <div className="bg-gradient-to-r from-blue-50 to-teal-50 rounded-2xl p-6">
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0">
+                          <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center">
+                            <span className="text-white font-bold text-lg">PG</span>
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <h5 className="text-lg font-bold text-gray-900 mb-1">AI Expert and Trainer</h5>
+                          <h6 className="text-blue-600 font-semibold mb-2">Parveen Goribidnur</h6>
+                          <p className="text-sm text-gray-600 mb-2 font-medium">Founder, United Regulation</p>
+                          <p className="text-sm text-gray-700 leading-relaxed">
+                            Seasoned AI expert with pioneering work in Speech Recognition at Microsoft's Global Product Activation. 
+                            Extensive experience at Microsoft, Oracle, and EMC Corporation. B.Tech in Computer Systems from UBC. 
+                            Algorithms, AI, and Civil Liberties Fellow with Friedrich Naumann Foundation, Berlin.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Doctor Entrepreneur */}
+                    <div className="bg-gradient-to-r from-teal-50 to-blue-50 rounded-2xl p-6">
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0">
+                          <div className="w-16 h-16 bg-teal-500 rounded-full flex items-center justify-center">
+                            <span className="text-white font-bold text-lg">UB</span>
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <h5 className="text-lg font-bold text-gray-900 mb-1">Doctor turned Entrepreneur</h5>
+                          <h6 className="text-teal-600 font-semibold mb-2">Dr. Utsav Bhattacharjee</h6>
+                          <p className="text-sm text-gray-600 mb-2 font-medium">CEO, Reflex</p>
+                          <p className="text-sm text-gray-700 leading-relaxed">
+                            Medical graduate from Calcutta Medical College (2013), former Junior Resident in Cardiology and Pediatric Surgery. 
+                            Ex-AstraZeneca Medical Science Liaison, IIM Ahmedabad alumnus (2017). Serial entrepreneur with experience at 
+                            Reculta, PickMywork, and Zolve. Currently CEO of Reflex and independent business consultant.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
                 <div className="p-8">
                   <div className="mb-8">
                     <div className="bg-gradient-to-r from-blue-50 to-teal-50 rounded-2xl p-6 mb-6 transform hover:scale-105 transition-all duration-300">
@@ -251,6 +300,34 @@ const AIForDoctors: React.FC = () => {
                         <GraduationCap size={20} className="mr-2 text-white" />
                         <div className="text-white font-bold">🎓 STUDENT SPECIAL</div>
                         <GraduationCap size={20} className="ml-2 text-white" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Instructors Section for Accelerate */}
+                <div className="p-8 border-t border-teal-200">
+                  <h4 className="text-xl font-bold text-gray-900 mb-6 text-center">Sessions are led by</h4>
+                  
+                  <div className="space-y-6">
+                    {/* Doctor Entrepreneur */}
+                    <div className="bg-gradient-to-r from-teal-50 to-green-50 rounded-2xl p-6">
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0">
+                          <div className="w-16 h-16 bg-teal-500 rounded-full flex items-center justify-center">
+                            <span className="text-white font-bold text-lg">UB</span>
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <h5 className="text-lg font-bold text-gray-900 mb-1">Doctor turned Entrepreneur</h5>
+                          <h6 className="text-teal-600 font-semibold mb-2">Dr. Utsav Bhattacharjee</h6>
+                          <p className="text-sm text-gray-600 mb-2 font-medium">CEO, Reflex</p>
+                          <p className="text-sm text-gray-700 leading-relaxed">
+                            Medical graduate from Calcutta Medical College (2013), former Junior Resident in Cardiology and Pediatric Surgery. 
+                            Ex-AstraZeneca Medical Science Liaison, IIM Ahmedabad alumnus (2017). Serial entrepreneur with experience at 
+                            Reculta, PickMywork, and Zolve. Currently CEO of Reflex and independent business consultant.
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
